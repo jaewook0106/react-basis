@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <!-- 배포 시에는 
+  <script src="https://unpkg.com/react@17/umd/react.product.js" crossorigin></script>
+  -->
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <title>리액트연습</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const e = React.createElement;
+    class LikeButton extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          liked: false,
+
+        };
+      }
+
+      render() {
+        return e(
+          'button', 
+          { onClick: () => { this.setState({ liked: true }) }, type: 'button' }, 
+          this.state.liked ? 'liked' : 'unliked');  // <button>like</button>
+      }
+    }
+  </script>
+  <script>
+    ReactDOM.render(e(LikeButton), document.querySelector('#root'));
+  </script>
+
+</body>
+</html>
