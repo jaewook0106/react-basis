@@ -4,48 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-  <!-- 배포 시에는 
-  <script src="https://unpkg.com/react@17/umd/react.product.js" crossorigin></script>
-  -->
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <title>리액트연습</title>
+  <title>끝말잇기</title>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const e = React.createElement;
-    class LikeButton extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          liked: false,
-
-        };
-      }
-
-      render() {
-        // return e(
-        //   'button', 
-        //   { onClick: () => { this.setState({ liked: true }) }, type: 'button' }, 
-        //   this.state.liked ? 'liked' : 'unliked');  
-        return <button 
-          type="sumit" 
-          onClick={()=>{ this.setState({ liked: true })} } > {this.state.liked ? 'Liked' : 'Like'}
-          </button>;
-          // JSX (JS + XML)
-      }
-    }
-  </script>
-  <script type="text/babel">
-    // ReactDOM.render(e(LikeButton), document.querySelector('#root'));
-    ReactDOM.render(
-      <div className="btn_wrap">
-        <LikeButton />
-      </div>
-      , document.querySelector('#root'));
-  </script>
-
+    <div id="root"></div>
+    <script src="./dist/app.js"></script>
 </body>
 </html>
