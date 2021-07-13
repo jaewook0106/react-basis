@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <!-- 배포 시에는 
+  <script src="https://unpkg.com/react@17/umd/react.product.js" crossorigin></script>
+  -->
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>구구단</title>
+  <style>
+    
+  </style>
+</head>
+<body>  
+  <div id="root"></div>
+  <script type="text/babel">
+    class GuGuDan extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          firstNum: Math.ceil(Math.random() * 9),
+          lastNum: Math.ceil(Math.random() * 9),
+          value: '',
+          result: '',
+        }
+      }
+      onSubmit = (e) => {
+        e.preventDefault();
+        if(parseInt(this.state.value) === this.state.firstNum * this.state.lastNum) {
+          // this.setState({
+          //   result: '정답 :' + this.state.value,
+          //   firstNum: Math.ceil(Math.random() * 9),
+          //   lastNum: Math.ceil(Math.random() * 9),
+          //   value: '',
+
+          // })
+          this.setState((prevState) => {
+            return {
+              result: '정답 : ' + prevState.value,
+              firstNum: Math.ceil(Math.random() * 9),
+              lastNum: Math.ceil(Math.random() * 9),
+              value: '',
+            }
+          });
+          this.input.focus();
+        } else {
+          this.setState({
+            result: '땡',
+            value: '',
+          });
+          this.input.focus();
+        }
+        
+      };
+      onRefInput = (c) => {this.input = c;}
+      input;
+
+      onChange = (e) => this.setState({ value: e.target.value});
+      render() { 
+        return (
+          //React.Fragment
+          <>
+            <div>{this.state.firstNum} 곱하기 {this.state.lastNum} 는?</div>
+            <form onSubmit={this.onSubmit}>
+              <input type="number" ref={this.onRefInput} value={this.state.value} onChange={this.onChange} />
+              <button type="submit">입력</button>
+
+            </form>
+            <div>{this.state.result}</div>
+          </>
+        );
+      }
+    }
+  </script>
+  <script type="text/babel">
+    ReactDOM.render(
+      <div>
+        <GuGuDan />
+        <GuGuDan />
+        <GuGuDan />
+      </div>, document.querySelector('#root'));
+  </script>
+</body>
+</html>
