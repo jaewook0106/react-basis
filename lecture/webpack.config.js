@@ -30,8 +30,8 @@ module.exports = {
         ],
         plugins:[
           '@babel/plugin-proposal-class-properties',
-          'react-refresh/babel'
         ]
+          'react-refresh/babel'
       },
     }],
   },
@@ -41,9 +41,9 @@ module.exports = {
     new RefreshWebpackPlugin()
   ],
   output: {
-    path: path.join(__dirname, 'dist'),  // __dirname 현재폴더
+    path: path.join(__dirname, 'dist'),  // __dirname 현재폴더 실제경로
     filename: 'app.js',
-    publicPath: '/dist/'
+    publicPath: '/dist/'   //가상경로
   }, // 출력
 
   devServer: {
