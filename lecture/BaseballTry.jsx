@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 
-class BaseballTry extends Component {
-  state = {
+// class BaseballTry extends Component {
+//   state = {
 
-  }
+//   }
+    //  const { item } = this.props;
+//   render() {
+//     return (
+//       <li>
+//         {item.try}<br /> {item.result}
+//       </li>
+//     )
+//   }
+// }
 
-  render() {
-    return (
-      <li>
-        {this.props.item.try}<br /> {this.props.item.result}
-      </li>
-    )
-  }
+
+const BaseballTry = ({ item }) => {
+
+  return (
+    <li>
+      {item.try}<br /> {item.result}
+    </li>
+  )
+  
 }
 
 export default BaseballTry

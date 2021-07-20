@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 // const { useState, useRef } = React;
 import BaseballTry from './BaseballTry';
 
@@ -11,89 +11,80 @@ function getNumbers() {
     arr.push(chosen);
   }
   return arr;
-}
+} // this 를 안쓰거나 공통으로 쓰는거는 밖으로 뺀다 
 
-class Baseball extends Component {
 
-  state = {
-    result : '',
-    value: '',
-    tries: [],
-    answer: getNumbers()
-  }
+const Baseball = () => {
+  const [result, setResult] = useState('');
+  const [tries, setTries] = useState([]);
+  const [value, setValue] = useState('');
+  const [answer, setAnswer] = useState(getNumbers());
 
-  onSubmitFrom = (e) => {
+  const onSubmitFrom = (e) => {
     
     e.preventDefault();
-    if(this.state.value === this.state.answer.join('')) {
-      this.setState({
-        result: '홈런',
-        tries: [...this.state.tries, { try: this.state.value, result: '홈런!'}]
+    if(value === answer.join('')) {
+      setResult('홈런');
+      setTries( (prevTries) => {
+        return [...prevTries, { try: value, result: '홈런!'}]
       })
+      
       // alert('게임을 다시 시작합니다.')
-      // this.setState({
-      //   value: '',
-      //   answer: getNumbers(),
-      //   tries: []
-      // })
+      // setValue('');
+      // setAnswer(getNumbers());
+      // setTries([]);
+
     } else { // 답이 틀리다
-      const answerArr = this.state.value.split('').map( item => parseInt(item))
+      const answerArr = value.split('').map( item => parseInt(item))
       let strike = 0;
       let ball = 0;
-      if(this.state.tries.length >= 9) {
-        this.setState({
-          result: `10번 넘게 틀려서 실패! 답은 ${this.state.answer.join('')}`
-        });
+      if(tries.length >= 9) {
+        setResult(`10번 넘게 틀려서 실패! 답은 ${answer.join('')}`);
         alert('게임을 다시 시작합니다.')
-        this.setState({
-          value: '',
-          answer: getNumbers(),
-          tries: []
-        })
+        setValue('');
+        setAnswer(getNumbers());
+        setTries([]);
       } else {
         for( let i = 0; i < 4; i+=1) {
-          if(answerArr[i] === this.state.answer[i]) {
+          if(answerArr[i] === answer[i]) {
             strike += 1
-          } else if(this.state.answer.includes(answerArr[i])) {
+          } else if(answer.includes(answerArr[i])) {
             ball += 1;
           }
           
         }
-        this.setState({
-          tries: [...this.state.tries, {try: this.state.value, result: `${strike} 스트라이트, ${ball} 볼`}],
-          value: ''
+        setTries((prevTries) => {
+          return [...prevTries, {try: value, result: `${strike} 스트라이트, ${ball} 볼`}]
         })
+        setValue('');
       }
     }
   }
 
-  onChangeInput = (e) => {
-    this.setState({
-      value: e.target.value
-    })
+  const onChangeInput = (e) => {
+
+    setValue(e.target.value);
   }
 
-  render() {
-    return (
-      <>
-        <h1>{this.state.value}</h1>
-        {this.state.answer}
-        <form onSubmit={this.onSubmitFrom}>
-          <input maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
-          <button type="button">입력</button>
-        </form>
-        <div>시도: {this.state.tries.length}</div>
-        
-        <ul>
-          {this.state.tries.map((item, idx) => {
-            return (
-              <BaseballTry key={item + idx} item={item} idx={idx} />
-            )
-          })}
-        </ul>
-      </>
-    )
-  }
+  return (
+    <>
+      <h1>{value}</h1>
+      {answer}
+      <form onSubmit={onSubmitFrom}>
+        <input maxLength={4} value={value} onChange={onChangeInput}/>
+        <button type="button">입력</button>
+      </form>
+      <div>시도: {tries.length}</div>
+      
+      <ul>
+        {tries.map((item, idx) => {
+          return (
+            <BaseballTry key={item + idx} item={item} idx={idx} />
+          )
+        })}
+      </ul>
+    </>
+  )
 }
 
 export default Baseball;
