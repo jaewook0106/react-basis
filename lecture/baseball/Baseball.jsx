@@ -15,6 +15,7 @@ function getNumbers() {
 
 
 const Baseball = () => {
+
   const [result, setResult] = useState('');
   const [tries, setTries] = useState([]);
   const [value, setValue] = useState('');

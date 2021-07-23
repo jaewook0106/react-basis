@@ -81,6 +81,7 @@ class Baseball extends Component {
   }
 
   render() {
+    // const { value, tries, answer } = this.state;
     return (
       <>
         <h1>{this.state.value}</h1>

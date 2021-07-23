@@ -1,5 +1,5 @@
 const React = require('react');
-const { Component } = React;
+const { Component, createRef } = React; //createRef
 
 
 class WordRelay extends React.Component {
@@ -18,6 +18,9 @@ class WordRelay extends React.Component {
         value: ''
       })
       this.input.focus();
+      // createRef 쓸 경우 훅스처럼 ref 처리
+      // this.input.current.focus();
+
     } else {
       this.setState({
         result: '땡',
@@ -33,8 +36,12 @@ class WordRelay extends React.Component {
 
   input;
   onRefInput = (c) => {
+    // 함수라도 ref를 사용할때 다른동작을 넣을 수도 있다.
     this.input = c;
   };
+
+  //createRef 쓸경우 훅스 처럼 ref 처리 가능
+  // onRefInput = createRef();
 
   render() {
     return (
