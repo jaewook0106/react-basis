@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // const { useState, useRef } = React;
 import BaseballTry from './BaseballTry';
+import styled, { css } from 'styled-components'
 
 function getNumbers() {
   const candidate = [1,2,3,4,5,6,7,8,9];
@@ -67,9 +68,29 @@ const Baseball = () => {
     setValue(e.target.value);
   }
 
+  const Cricle = styled.div`
+    width:100px;
+    height:100px;
+    background-color:skyblue;
+    margin-top:20px;
+    &:hover {
+      background-color:black;
+    }
+    ${props => props.big && css`width:200px`}
+  `
+
+  const Test = styled.div`
+    .tit{
+      font-size:20px;
+    }
+    .b{
+      width:300px;
+    }
+  `
+
   return (
-    <>
-      <h1>{value}</h1>
+    <Test>
+      <h1 className="tit">{value}</h1>
       {answer}
       <form onSubmit={onSubmitFrom}>
         <input maxLength={4} value={value} onChange={onChangeInput}/>
@@ -84,7 +105,10 @@ const Baseball = () => {
           )
         })}
       </ul>
-    </>
+      <Cricle big/>
+      <Cricle className="b" />
+      <Cricle/>
+    </Test>
   )
 }
 

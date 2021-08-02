@@ -1,6 +1,6 @@
 const React = require('react');
 const { useState, useRef } = React;
-
+// const styled = require('styled-components');
 
 const WordRelay = () => {
   const [word, setWord] = useState('에드워드');
@@ -26,7 +26,7 @@ const WordRelay = () => {
     setValue(e.target.value)
   };
 
-  
+
 
 
   return (
