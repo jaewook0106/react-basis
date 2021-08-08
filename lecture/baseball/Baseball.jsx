@@ -71,10 +71,11 @@ const Baseball = () => {
   const Cricle = styled.div`
     width:100px;
     height:100px;
+    border-radius:50%;
     background-color:skyblue;
     margin-top:20px;
     &:hover {
-      background-color:black;
+      background-color:blue;
     }
     ${props => props.big && css`width:200px`}
   `
